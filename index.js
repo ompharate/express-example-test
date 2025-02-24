@@ -1,23 +1,28 @@
-const express = require('express');
+const express = require("express");
+const { connectToDb } = require("./utils");
+
+connectToDb();
 
 const app = express();
 const port = 3000;
 
-// Middleware for parsing JSON bodies
 app.use(express.json());
 
-// Basic route
-app.get('/', (req, res) => {
-    res.json({ message: 'Welcome to Express API' });
+app.use("/api", require("./routes/itemRouter"));
+
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to Express API" });
 });
 
-// Error handling middleware
+app.get("/health", (req, res) => {
+  res.json({ status: "UP" });
+});
+
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ error: 'Something went wrong!' });
+  console.error(err.stack);
+  res.status(500).json({ error: "Something went wrong!" });
 });
 
-// Start server
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });

@@ -1,18 +1,7 @@
 const express = require('express');
-const mongoose = require('mongoose');
-
+const Item = require('../models/itemModel.js');
 const router = express.Router();
 
-// Sample MongoDB Schema
-const itemSchema = new mongoose.Schema({
-    name: String,
-    description: String,
-    price: Number
-});
-
-const Item = mongoose.model('Item', itemSchema);
-
-// CREATE - POST API
 router.post('/items', async (req, res) => {
     try {
         const newItem = new Item(req.body);
