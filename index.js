@@ -11,7 +11,7 @@ app.use(express.json());
 app.use("/api", require("./routes/itemRouter"));
 
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Express API" });
+  res.json({ message: "Welcome to Express API doc" });
 });
 
 app.get("/health", (req, res) => {
